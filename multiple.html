@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>EaselJS Example: Drawing an animated vector bar graph.</title>
+    <style type="text/css">
+    p{    border: 4px solid black;
+    margin-left: 40px;
+    font-size: 33px;
+    width: 117px;
+    font-family: monospace;
+    text-align: center;}
+    </style>
+	<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery-ui.js"></script>
+	<script>
+  function init() {
+ var stage = new createjs.Stage("demoCanvas");
+  var stage2 = new createjs.Stage("demoCanvas2");
+
+var drag = stage.addChild(new createjs.Container());
+var show = stage2.addChild(new createjs.Container());
+var shape1 = new createjs.Shape();
+var shape2 = new createjs.Shape();
+var shape3 = new createjs.Shape();
+
+ var rec = new createjs.Shape();
+ var circle = new createjs.Shape();
+ var circle1 = new createjs.Shape();
+ var circle2 = new createjs.Shape();
+ var circle3 = new createjs.Shape();
+ var circle4 = new createjs.Shape();
+ var circle5 = new createjs.Shape();
+  var pic1 = new createjs.Shape();
+ var pic2 = new createjs.Shape();
+ var pic3 = new createjs.Shape();
+ var pic4 = new createjs.Shape();
+ var pic5 = new createjs.Shape();
+  var pic6 = new createjs.Shape();
+ var pic7 = new createjs.Shape();
+ var pic8 = new createjs.Shape();
+ var pic9 = new createjs.Shape();
+
+   rec.graphics.beginFill("red").drawCircle(0, 0, 20);
+circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
+circle1.graphics.beginFill("pink").drawCircle(0, 0, 20);
+circle2.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
+circle3.graphics.beginFill("red").drawCircle(0, 0, 20);
+circle4.graphics.beginFill("pink").drawCircle(0, 0, 20);
+circle5.graphics.beginFill("grey").drawCircle(0, 0, 20);
+shape1.graphics.beginFill("red").drawCircle(0, 0, 20);
+shape2.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
+shape3.graphics.beginFill("pink").drawCircle(0, 0, 20);
+pic1.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
+pic2.graphics.beginFill("red").drawCircle(0, 0, 20);
+pic3.graphics.beginFill("pink").drawCircle(0, 0, 20);
+pic4.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
+pic5.graphics.beginFill("red").drawCircle(0, 0, 20);
+pic6.graphics.beginFill("pink").drawCircle(0, 0, 20);
+pic7.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
+pic8.graphics.beginFill("red").drawCircle(0, 0, 20);
+pic9.graphics.beginFill("pink").drawCircle(0, 0, 20);
+
+
+
+
+circle.x = 50;
+circle.y = 100;
+
+shape1.x = 50;
+shape1.y = 30;
+
+shape2.x = 100;
+shape2.y = 30;
+
+shape3.x = 150;
+shape3.y = 30;
+
+rec.x = 100;
+rec.y = 100;
+
+circle1.x = 150;
+circle1.y = 100;
+
+circle2.x = 50;
+circle2.y = 150;
+
+circle4.x = 150;
+circle4.y = 150;
+
+circle3.x = 100;
+circle3.y = 150;
+
+show.x = 10;
+show.y = 0;
+/*circle5.x = 100;
+circle5.y = 250;
+*/
+
+pic1.x = 150;
+pic1.y = 100;
+
+pic2.x = 50;
+pic2.y = 100;
+
+pic3.x = 100;
+pic3.y = 100;
+
+pic4.x = 150;
+pic4.y = 150;
+
+pic5.x = 50;
+pic5.y = 150;
+
+pic6.x = 100;
+pic6.y = 150;
+
+pic7.x = 150;
+pic7.y = 200;
+
+pic8.x = 50;
+pic8.y = 200;
+
+pic9.x = 100;
+pic9.y = 200;
+
+stage.addChild(rec);
+drag.addChild(shape1);
+drag.addChild(shape2);
+drag.addChild(shape3);
+stage.addChild(circle);
+stage.addChild(circle1);
+stage.addChild(circle2);
+stage.addChild(circle3);
+stage.addChild(circle4);
+show.addChild(pic9);
+show.addChild(pic8);
+show.addChild(pic7);
+show.addChild(pic6);
+show.addChild(pic5);
+show.addChild(pic4);
+show.addChild(pic3);
+show.addChild(pic2);
+show.addChild(pic1);
+
+
+//stage.addChild(circle5);
+
+shape1.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+shape2.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+shape3.on("pressmove", function(evt) {
+    evt.target.x = evt.stageX;
+    evt.target.y = evt.stageY;
+    stage.update();
+});
+
+             
+
+createjs.Ticker.on("tick", tick);
+function tick(evt){
+if(shape1.y > 150 && shape2.y > 150 && shape3.y > 190){
+    shape1.alpha = shape2.alpha = shape3.alpha = 0.2;
+ 
+      } 
+      else{
+         shape1.alpha = shape2.alpha = shape3.alpha = 1;
+      } 
+
+}
+
+stage.update();
+stage2.update();
+}
+</script>
+
+</head>
+<body onload="init();">
+  <canvas id="demoCanvas" width="500" height="300" VerticalAlignment="Center" HorizontalAlignment="Center" ></canvas>
+<p> OUTPUT</p>
+    <canvas id="demoCanvas2" width="500" height="250"></canvas>
+ 
+
+
+
+<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+</body>
+</html>
