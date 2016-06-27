@@ -17,9 +17,14 @@
   function init() {
  var stage = new createjs.Stage("demoCanvas");
   var stage2 = new createjs.Stage("demoCanvas2");
-
 var drag = stage.addChild(new createjs.Container());
+var box = stage.addChild(new createjs.Container());
+
 var show = stage2.addChild(new createjs.Container());
+ var circle5 = new createjs.Shape();
+ var circle6 = new createjs.Shape();
+ var circle7 = new createjs.Shape();
+ // =-------------------
 var shape1 = new createjs.Shape();
 var shape2 = new createjs.Shape();
 var shape3 = new createjs.Shape();
@@ -30,7 +35,8 @@ var shape3 = new createjs.Shape();
  var circle2 = new createjs.Shape();
  var circle3 = new createjs.Shape();
  var circle4 = new createjs.Shape();
- var circle5 = new createjs.Shape();
+
+
   var pic1 = new createjs.Shape();
  var pic2 = new createjs.Shape();
  var pic3 = new createjs.Shape();
@@ -41,16 +47,50 @@ var shape3 = new createjs.Shape();
  var pic8 = new createjs.Shape();
  var pic9 = new createjs.Shape();
 
+shape1.graphics.beginFill("red").drawCircle(0, 0, 20);
+shape2.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
+shape3.graphics.beginFill("pink").drawCircle(0, 0, 20);
+
+circle5.graphics.beginFill("black").drawRect(-20,-20,40,40);
+circle6.graphics.beginFill("black").drawRect(-20,-20,40,40);
+circle7.graphics.beginFill("black").drawRect(-20,-20,40,40);
+
+// rectangular blocks around circle in output
+/*pic8.graphics.beginFill("black").drawRect(30,-20,40,40);
+pic7.graphics.beginFill("black").drawRect(30,-20,40,40);*/
+
+pic9.graphics.beginFill("black").drawRect(-20,-20,40,40);
+pic8.graphics.beginFill("black").drawRect(-20,-20,40,40);
+pic7.graphics.beginFill("black").drawRect(-20,-20,40,40);
+
+pic6.graphics.beginFill("black").drawRect(-20,-20,40,40);
+pic5.graphics.beginFill("black").drawRect(-20,-20,40,40);
+pic4.graphics.beginFill("black").drawRect(-20,-20,40,40);
+
+pic3.graphics.beginFill("black").drawRect(-20,-20,40,40);
+pic2.graphics.beginFill("black").drawRect(-20,-20,40,40);
+pic1.graphics.beginFill("black").drawRect(-20,-20,40,40);
+
+
+
+//game
+circle.graphics.beginFill("black").drawRect(-20,-20,40,40);
+circle1.graphics.beginFill("black").drawRect(-20,-20,40,40);
+circle2.graphics.beginFill("black").drawRect(-20,-20,40,40);
+
+circle3.graphics.beginFill("black").drawRect(-20,-20,40,40);
+circle4.graphics.beginFill("black").drawRect(-20,-20,40,40);
+rec.graphics.beginFill("black").drawRect(-20,-20,40,40);
+
+
    rec.graphics.beginFill("red").drawCircle(0, 0, 20);
 circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
 circle1.graphics.beginFill("pink").drawCircle(0, 0, 20);
 circle2.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
 circle3.graphics.beginFill("red").drawCircle(0, 0, 20);
 circle4.graphics.beginFill("pink").drawCircle(0, 0, 20);
-circle5.graphics.beginFill("grey").drawCircle(0, 0, 20);
-shape1.graphics.beginFill("red").drawCircle(0, 0, 20);
-shape2.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
-shape3.graphics.beginFill("pink").drawCircle(0, 0, 20);
+
+
 pic1.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 20);
 pic2.graphics.beginFill("red").drawCircle(0, 0, 20);
 pic3.graphics.beginFill("pink").drawCircle(0, 0, 20);
@@ -64,8 +104,8 @@ pic9.graphics.beginFill("pink").drawCircle(0, 0, 20);
 
 
 
-circle.x = 50;
-circle.y = 100;
+
+
 
 shape1.x = 50;
 shape1.y = 30;
@@ -75,6 +115,9 @@ shape2.y = 30;
 
 shape3.x = 150;
 shape3.y = 30;
+
+circle.x = 50;
+circle.y = 100;
 
 rec.x = 100;
 rec.y = 100;
@@ -90,6 +133,15 @@ circle4.y = 150;
 
 circle3.x = 100;
 circle3.y = 150;
+
+circle5.x = 50;
+circle5.y = 200;
+
+circle6.x = 150;
+circle6.y = 200;
+
+circle7.x = 100;
+circle7.y = 200;
 
 show.x = 10;
 show.y = 0;
@@ -124,15 +176,21 @@ pic8.y = 200;
 pic9.x = 100;
 pic9.y = 200;
 
-stage.addChild(rec);
+
 drag.addChild(shape1);
 drag.addChild(shape2);
 drag.addChild(shape3);
-stage.addChild(circle);
-stage.addChild(circle1);
-stage.addChild(circle2);
-stage.addChild(circle3);
-stage.addChild(circle4);
+box.addChild(rec);
+box.addChild(circle);
+box.addChild(circle1);
+box.addChild(circle2);
+box.addChild(circle3);
+box.addChild(circle4);
+box.addChild(circle5);
+box.addChild(circle6);
+box.addChild(circle7);
+
+
 show.addChild(pic9);
 show.addChild(pic8);
 show.addChild(pic7);
@@ -145,34 +203,62 @@ show.addChild(pic1);
 
 
 //stage.addChild(circle5);
-
+var isShape1Dropped = false;
 shape1.on("pressmove", function(evt) {
+  if(!isShape1Dropped){
     evt.target.x = evt.stageX;
     evt.target.y = evt.stageY;
+    if(evt.target.x <= 110 && evt.target.y >= 190){
+      shape1.x = 100;
+      shape1.y = 200;
+      box.addChild(shape1);
+      isShape1Dropped = true;
+    }
     stage.update();
+  }
 });
+
+var isShape2Dropped = false;
 shape2.on("pressmove", function(evt) {
+    if(!isShape2Dropped){
     evt.target.x = evt.stageX;
     evt.target.y = evt.stageY;
+    if(evt.target.x <= 60 && evt.target.y >= 190){
+      shape2.x = 50;
+      shape2.y = 200;
+      box.addChild(shape2);
+      isShape2Dropped = true;
+    }
     stage.update();
+  }
 });
+var isShape3Dropped = false;
 shape3.on("pressmove", function(evt) {
+       if(!isShape3Dropped){
     evt.target.x = evt.stageX;
     evt.target.y = evt.stageY;
+    if(evt.target.x <= 160 && evt.target.y >= 190){
+      shape3.x = 150;
+      shape3.y = 200;
+      box.addChild(shape3);
+      isShape3Dropped = true;
+    }
     stage.update();
+  }
 });
 
              
 
 createjs.Ticker.on("tick", tick);
-function tick(evt){
-if(shape1.y > 150 && shape2.y > 150 && shape3.y > 190){
-    shape1.alpha = shape2.alpha = shape3.alpha = 0.2;
- 
+function tick(evt){ // 120 >=shape1.x >= 90 &&  60 >=shape2.x >= 30 &&  170 >=shape3.x >= 150
+if(shape1.y > 150 && shape2.y > 150 && shape3.y > 190 && shape1.x >= 90 && shape2.x >= 30 && shape3.x >= 145){
+    shape1.alpha = shape2.alpha = shape3.alpha = 0.6;
+
+
+stage.update();
+
       } 
-      else{
-         shape1.alpha = shape2.alpha = shape3.alpha = 1;
-      } 
+     
 
 }
 
@@ -183,6 +269,7 @@ stage2.update();
 
 </head>
 <body onload="init();">
+<p>MATCH THE BALL</p>
   <canvas id="demoCanvas" width="500" height="300" VerticalAlignment="Center" HorizontalAlignment="Center" ></canvas>
 <p> OUTPUT</p>
     <canvas id="demoCanvas2" width="500" height="250"></canvas>
