@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>loop</title>
+	<script type="text/javascript">
+	var keys = {};
+	var stage;
+		function init() {
+			 stage = new createjs.Stage("canvas");
+			var square = new createjs.Shape();
+			var circle = new createjs.Shape();
+			 var show = stage.addChild(new createjs.Container());
+   function ball(shape1){
+              	
+    shape1.x = 50;
+    shape1.y = 50;
+    shape1.graphics.beginStroke("#000000").drawCircle(shape1.x, shape1.y, 50);
+   
+    stage.addChild(shape1);
+            createjs.Ticker.addEventListener("tick", tick);
+    createjs.Ticker.setFPS(60);
+            this.document.onkeydown = keydown;
+    this.document.onkeyup = keyup;
+              }
+              ball(square);
+
+			
+
+			  
+			
+			stage.update();
+
+
+			// trail
+			function keydown(event) {
+    keys[event.keyCode] = true;
+}
+
+function keyup(event) {
+    delete keys[event.keyCode];
+}
+
+function tick() {
+    if (keys[37]) square.x -= 10;
+    if (keys[38]) square.y -= 10;
+    if (keys[39]) square.x += 10;
+    if (keys[40]) square.y += 10;
+    stage.update();
+}
+		 var arr = [];
+			// var color = ["DeepSkyBlue", "red", "pink", "red", "pink"]
+			function grid(shape) {
+				shape.y = -200;
+             for(var i=0; i < 5; i++){	
+             	shape.y += 80;
+                shape.x = -200;
+             	arr.push(shape.y);
+                for(var x=0; x < 5; x++){
+                  shape.x += 80;
+                 arr.push(shape.x);
+                 shape.graphics.beginStroke("black").drawRect(shape.x, shape.y, 80, 80);
+
+                stage.addChild(shape);
+                }
+              }
+            
+               
+
+            
+
+			}
+			grid(square);
+
+		}
+		
+	</script>
+ </head>
+<body onload="init();">
+
+
+    <canvas id="canvas" width="1000" height="500"></canvas>
+ 
+
+
+
+<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+</body>
+</html>
